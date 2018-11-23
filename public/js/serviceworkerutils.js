@@ -1,4 +1,4 @@
-const ServiceWorker = (function($, document, window, undefined){
+const ServiceWorkerUtils = (function($, document, window, undefined){
 
   const urlBase64ToUint8Array = function(base64String) {
     var padding = '='.repeat((4 - base64String.length % 4) % 4);

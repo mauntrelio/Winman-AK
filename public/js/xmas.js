@@ -1,7 +1,7 @@
 
 $(function(){
 
-  ServiceWorker.register();
+  ServiceWorkerUtils.register();
   Audio.init();
   Calendar.init();
   Video.init();
