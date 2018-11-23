@@ -1,0 +1,41 @@
+{% extends '../layout.html' %}
+
+{% block title %}{{day_asked}}. Dezember | {% endblock %}
+
+{% block content %}
+
+        <h1>{{day_asked}}. Dezember</h1>
+        <h2>{{config.calendar[day_asked-1][1]}}</h2>
+
+        <video id="video" 
+          data-image="{{(config.calendar[day_asked-1][1])|sanitize}}"
+          data-text="{{config.calendar[day_asked-1][1]}}" 
+          data-day="{{day_asked}}" controls 
+          poster="media/{{(config.calendar[day_asked-1][1])|sanitize}}.jpg">
+            <source src="media/{{(config.calendar[day_asked-1][1])|sanitize}}.webm" type="video/webm">
+        </video>
+
+        <h2>
+        {% if (config.calendar[day_asked-1])|length > 2 %}
+          {{ config.calendar[day_asked-1][2] }}
+        {% endif %}
+        </h2>    
+
+        <p>
+          {% if day_asked > 1 %}
+            <a class="btn btn-prev" title="Previous" href="/{{day_asked-1}}"><svg class="icon icon-angle-left"><use xlink:href="/img/icons.svg#icon-angle-left"></use></svg></a>
+          {% endif %}
+          
+          <a href="#" title="Full screen" id="fullscreen" class="btn"><svg class="icon icon-resize-full-alt"><use xlink:href="/img/icons.svg#icon-resize-full-alt"></use></svg></a>
+
+          <a href="#" data-day="{{day_asked}}" title="QRCode" id="create_qrcode" class="btn"><svg class="icon icon-qrcode"><use xlink:href="/img/icons.svg#icon-qrcode"></use></svg></a>
+          
+          <a href="/" title="Home" class="btn"><svg class="icon icon-home"><use xlink:href="/img/icons.svg#icon-home"></use></svg></a>
+          
+          {% if day_asked < 24 %}
+            <a class="btn btn-next" title="Next" href="/{{day_asked+1}}"><svg class="icon icon-angle-right"><use xlink:href="/img/icons.svg#icon-angle-right"></use></svg></a>
+          {% endif %}
+
+        </p>
+
+{% endblock %}

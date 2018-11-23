@@ -1,0 +1,40 @@
+{
+	"base_url": "https://xmas.winman.online/",
+	"title": "WinkelManetti Adventskalender",
+	"messages": {
+		"sorry": {
+			"de": "Es tut mir Leid, heute ist es noch zu fruh",
+			"it": "Spiacente, oggi è ancora troppo presto"
+		},
+		"offline": {
+			"de": "Keine Internetverbindung!",
+			"it": "Impossibile connettersi a internet!"
+		}
+	},
+	"calendar": [
+		["01","Sled Race"],
+		["02","Disco Christmas"],
+		["03","Snowman Scurry"],
+		["04","Elf Dance"],
+		["05","Macareindeer"],
+		["06","Santa's Twerk Shop", "Featuring Oma"],
+		["07","Ice Ice Baby Christmas"],
+		["08","Hawaiian Christmas"],
+		["09","Santa Baby"],
+		["10","Elf Fun Factory"],
+		["11","A Christmas Rap Story", "Featuring Zio Alessandro"],
+		["12","Elf Office Party", "Featuring Nonna"],
+		["13","Winter Wonderland"],
+		["14","Super Santa", "Featuring Oma"],
+		["15","Comin' to Town"],
+		["16","Elf Christmas Tree", "Featuring Susanne"],
+		["17","The Buttcracker", "Featuring Zio Alessandro"],
+		["18","Feliz Navidad"],
+		["19","Rockin' Around the Christmas Tree"],
+		["20","A Christmas Carol", "Featuring Nonno"],
+		["21","Farting Carol", "Featuring Opa"],
+		["22","Elf Snowball Fight", "Featuring Susanne"],
+		["23","Beginning to Look Like Christmas"],
+		["24","Twinkle all the Way"]	
+	]
+}

@@ -1,0 +1,60 @@
+
+<html lang="de,it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="WinkelManetti online Adventskalendar">
+    <meta name="author" content="Mau">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+        
+    <link rel="manifest" href="manifest.json">
+ 
+    <link rel="icon" href="/img/launcher-icon-1x.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/img/launcher-icon-1x.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/launcher-icon-1-5x.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/launcher-icon-3x.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/img/launcher-icon-4x.png" />
+
+    <link href="/css/reset.css" rel="stylesheet">
+    
+    <link href="/css/spicy-rice.css" rel="stylesheet">
+
+    <link href="/css/icons.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <title>{% block title %}{% endblock %}WinkelManetti online Adventskalender</title> 
+
+  </head>
+
+  <body data-public-key="{{config.publicKey}}">
+
+    <div class="container">
+
+      <main role="main">
+    
+        {% block content %}{% endblock %}
+
+      </main>
+
+      <footer>
+        <div>
+          <p><a href="/">xmas.winman.online</a></p>
+        </div>
+      </footer>
+    </div>
+
+    <div id="overlay"></div>
+    <div id="qrcode"></div>
+    
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    
+    <script src="/js/serviceworkerutils.js"></script>
+    <script src="/js/qrcode.js"></script>
+    <script src="/js/calendar.js"></script>
+    <script src="/js/audio.js"></script>
+    <script src="/js/video.js"></script>
+    
+    <script src="/js/xmas.js"></script>
+
+  </body>
+</html>

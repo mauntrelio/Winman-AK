@@ -1,0 +1,26 @@
+{% extends '../layout.html' %}
+{% block content %}
+
+<h1>{{config.title}}</h1>
+
+<p>
+  <a href="#" title="QRCode" id="create_qrcode" class="btn"><svg class="icon icon-qrcode"><use xlink:href="/img/icons.svg#icon-qrcode"></use></svg></a>
+  <a href="#" title="Audio switch" id="audio_switch" class="btn"><svg class="icon icon-volume-up"><use xlink:href="/img/icons.svg#icon-volume-up"></use></svg><svg class="icon icon-volume-off"><use xlink:href="/img/icons.svg#icon-volume-off"></use></svg></a>
+</p>
+
+{% for day in config.calendar %}
+    
+  <div class="kalender">
+    <a data-day="{{loop.index}}" 
+      style="background-image: url('media/{{day[0]}}.jpg')" 
+      href="/{{loop.index}}">{{loop.index}}</a>
+  </div>
+  
+{% endfor %}
+
+<iframe src="/audio/silence.mp3" allow="autoplay" type="audio/mp3"></iframe> 
+<audio id="audio_player" autoplay loop><source src="/audio/np.mp3" type="audio/mp3"></audio>
+
+<a href="https://github.com/mauntrelio/Winman-AK" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+{% endblock %}

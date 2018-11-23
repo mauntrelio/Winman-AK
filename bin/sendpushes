@@ -1,0 +1,93 @@
+#!/usr/bin/env node
+
+var Datastore = require('nedb');
+var webPush = require('web-push');
+var path = require('path');
+
+var config = require('../config/default.json');
+var secrets = require('../config/secrets.json');
+var utils = require('../lib/utils');
+
+var dbFile = path.join(__dirname, '..', secrets.db);
+var db = new Datastore({filename: dbFile, autoload: true});
+
+// initialize webPush library
+webPush.setVapidDetails(
+  'mailto:' + secrets.email,
+  secrets.vapidKeys.publicKey,
+  secrets.vapidKeys.privateKey
+);
+
+// get all the subscriptions
+function getSubscriptionsFromDatabase() {
+  return new Promise(function(resolve, reject) {
+    db.find({}, function(err, docs) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(docs);
+    })
+  });
+}
+
+// delete invalid subscription
+function deleteSubscriptionFromDatabase(subscriptionId) {
+  return new Promise(function(resolve, reject) {
+  db.remove({_id: subscriptionId }, {}, function(err) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
+    });
+  });
+}
+
+// send a webpush
+const triggerPushMsg = function(subscription, payload, options) {
+  return webPush.sendNotification(subscription, payload, options)
+  .catch((err) => {
+    if (err.statusCode === 410) {
+      return deleteSubscriptionFromDatabase(subscription._id);
+    } else {
+      console.log('Subscription is no longer valid: ', err);
+    }
+  });
+};
+
+// get the day and calculate TTL up to midnight:
+// we do not want to show notifications for yesterday
+var now = new Date();
+var lastMidnight = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        0,0,0);
+
+var tillMidnight = lastMidnight.getTime() + 86400*1000 - now.getTime();
+var ttl = Math.ceil(tillMidnight/1000);
+
+var day = now.getDate();
+
+// notification payload will already have all needed stuff to show the notification
+var payload = {
+  day: day,
+  text: day + ". Dezember: " + config.calendar[day-1][1],
+  image: "/media/thumbs/" +  utils.sanitize(config.calendar[day-1][1]) + ".jpg",
+  url: "/" + day
+};
+
+// now send the notifications
+getSubscriptionsFromDatabase()
+  .then(function(subscriptions) {
+    let promiseChain = Promise.resolve();
+    for (let i = 0; i < subscriptions.length; i++) {
+      const subscription = subscriptions[i];
+      promiseChain = promiseChain.then(() => {
+        return triggerPushMsg(subscription, JSON.stringify(payload), {TTL: ttl});
+      });
+    }
+    return promiseChain;
+});
+
