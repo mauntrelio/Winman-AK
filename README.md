@@ -155,12 +155,10 @@ The contents of the folders `public/media` (which contains the videos and the pi
 
 ## Possible improvements
 
-I really had an hard time to understand what Javascript Promises are and how they work... I am still improving the code.
+I still have an hard time to understand what Javascript Promises are and how they work... I am still improving the code.
 
 Here a list of "TODOs":
 
 - Improve code quality
 - Implement server side detection of pages visited by users who subscribed for notification (e.g. by storing the `endpoint` of the subscription request result in the local storage and then sending it to the server when visiting a page, so the server is informed which subscribed users do not need to be notified for that day)
 - [Improve UX](https://web-push-book.gauntface.com/chapter-03/01-permission-ux/) for notification permission request 
-- Provide smaller images for the notification icons
-- Optimize PNG images
