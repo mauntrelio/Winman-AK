@@ -4,18 +4,18 @@ This repository contains the code for my family's online Advent Calendar publish
 
 https://xmas.winman.online
 
-It is a small Progressive Web App, developed in Javascript, Node.js and Express. 
+Besides being a little surprise for my kids, it is a small Progressive Web App, developed in Javascript (server side technologies are Node.js and Express). 
 
 # Background
 
-Back in 2009, I created an online advent Calendar for my wife, using the "electronic postcards" that you could make on [JibJab](https://www.jibjab.com).
+Back in 2009, I created an online Advent Calendar for my wife, using the "electronic postcards" that you could make on [JibJab](https://www.jibjab.com).
 
 That calendar is still published here: https://mauriziomanetti.it/adventskalender. 
 
 Since it is 9 years old, it shows all its obsolescence, but what was mainly bothering me was the total lack of responsiveness: for a new calendar I wanted something that could be fully enjoyed on any modern device. 
 I started just with the requirement of **responsiveness** and ended up developing (and losing sleep) a **Progressive Web App** (PWA) that **can be installed** (at least on Android devices, tell me about Apple devices, if you have the chance) as a native device app, can be (partially) **used when offline**, and **supports push notifications**.
 
-Back then, reminders to the users (1!) about a new calendar day to be open was performed via e-mail (the access was password protected, with a different password per day which was the solution of a riddle sent in the body of the email). 
+Back then, reminders to the users (actually one user) about a new calendar day to be open was performed via e-mail (the access was password protected, with a different password per day which was the solution of a riddle sent in the body of the email). 
 
 For the new calendar I opted of course for **push notifications**, and this was for me the hardest part to understand, but I found an excellent tutorial with plenty of examples (and from which I also adapted some code) in here: [Web Push Book by Matt Gaunt](https://web-push-book.gauntface.com/).
 
@@ -46,7 +46,7 @@ What I learned, in order to make a PWA...
 
 ## Add to Home Screen dialog
 
-What you will need to make the "Add to Home Screen" (A2HS) dialog appear in Chrome for Android, at least as of November 2018:
+What you need to make the "Add to Home Screen" (A2HS) dialog appear in Chrome for Android, at least as of November 2018:
 
 - the web app is not already installed
 - meets a user engagement heuristic (currently, the user has interacted with the domain for at least 30 seconds)
@@ -62,7 +62,7 @@ as reported here: [Web Fundamentals: Add to Home Screen](https://developers.goog
 
 ## Push Notification
 
-All you need to know is in the [Web Push Book by Matt Gaunt](https://web-push-book.gauntface.com/).
+All you need to know about Web Push Notification is in the [Web Push Book by Matt Gaunt](https://web-push-book.gauntface.com/).
 
 What you will need to support Push Notifications:
 
@@ -76,13 +76,15 @@ I opted for hosting all the needed media and assets on my site, which revealed t
 
 ## Google fonts
 
-To download Google Fonts and host them locally (actually I use just one Google font) I used [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts).
+To download the used Google Fonts and host them locally (actually I only use one special font) I used [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts).
 
 ## Video download and conversion
 
-For the videos, it was hard to get them: [JibJab](https://www.jibjab.com), despite I have a paid subscription, does not offer the option to download them from the website. It is possible to download the videos through their Android App, however the quality of the videos is much poorer compared with what you get on the website. Somehow I was able to download the video from the browser, just to discover that, apparently, the actual rendering of the videos with characters' faces is performed by the browser, so my download was perfectly pointless.
+Luckily [JibJab](https://www.jibjab.com), with which I have a paid subscription, had enough e-postcards (now in the form of videos), to fill in the 24 slots of an Advent Calendar. 
 
-After some Google search and tries, I decided to record a screen capture. I am a Linux user, and I tried a couple of different applications until I found a perfect solution in [Kazam](https://launchpad.net/kazam), kind of an old tool but perfectly working, which also gives the possibility to record a portion of the screen, and can capture the audio from any audio output channel (or input, or both!). It produced nice and good quality mp4 videos from what was rendered on my screen.
+However getting the videos to host them on my website was: [JibJab](https://www.jibjab.com) does not offer the option to download the videos from the website, and reverse engineering their e-card webpage was also kind of impossible. It is possible to download the videos through their Android App, however the quality is much poorer compared with what you get on the website. Somehow, after some clever tentatives, I was able to download the video from the browser, just to discover that, apparently, the actual rendering of the videos with characters' faces is performed by the browser itself, so my download was perfectly pointless, resulting in a kind of reversed green screen videos.
+
+After some Google search and tries, I decided to record a screen capture. I am a Linux user, and I tried a couple of different applications until I found a perfect solution in [Kazam](https://launchpad.net/kazam), a tool apparently not anymore actively developed, but perfectly working, which also gives the possibility to record a portion of the screen, and can capture the audio from any audio output channel (or input, or both!). It produced nice and good quality mp4 videos from what was rendered on my screen.
 
 To convert the mp4 videos to a format that mobile devices like (webm), I used `ffmpeg`:
 
@@ -91,7 +93,7 @@ for file in *.mp4; do
 	filename=`basename $file .mp4`; 
 	echo "Converting $filename";
 	if [ ! -f $filename.webm ]; then 
-		ffmpeg -i $filename.mp4 -c:v libvpx -crf 10 -b:v 1M -c:a libvorbis $filename.webm; 
+		ffmpeg -i $filename.mp4 -c:v libvpx -crf 10 -b:v 1M -c:a libvorbis $filename.webm;
 	fi	
 done
 ```
@@ -111,7 +113,7 @@ for file in *.jpg; do
 done
 ```
 
-In the previous bash script the `disperse` script is used twice to get a better effect. I also obfuscated the filename with a trivial `rot13`, which later I reverted to a simpler numbering scheme, but without losing the possibility to change the order of the pictures and videos if I want. 
+In the previous bash script the `disperse` script is used twice to get a better effect. I also obfuscated the filename with a trivial `rot13`, which later I reverted to a simpler numbering scheme. 
 Finally the last conversion brings the jpg quality down to 30 (in a range 1 to 100) which impressively reduces the size of the images (since they are obfuscated the quality can be reduced a lot without harm).
 
 ## Start audio/video automatically on a web page
@@ -124,32 +126,32 @@ To start audio automatically on the home page, however, [I used a trick](https:/
 
 Well, they can, but there is drawback, at least on mobile devices.
 
-What I wanted to do is to avoid annoying users by showing a notification about a specific date if they already visited the page for that date. Thanks to the caching mechanism of a Service Worker it's easy to detect it. However, when you receive a push you MUST show a notification (by calling `self.registration.showNotification` in the Service Worker), otherwise, due to the default current policy implemented in Chrome ([Ensure Push API is used for Notifications](https://docs.google.com/document/d/13VxFdLJbMwxHrvnpDm8RXnU41W2ZlcP0mdWWe9zXQT8)) the browser will show a not so nice default notification (Website has been updated in the background). This problem does not seem to affect Chromium. 
+What I wanted to do is to avoid annoying users by showing a notification about a specific date if they already visited the page for that date. Thanks to the caching mechanism of a Service Worker it's easy to detect it. However, when you receive a push (handling the `push` event in the Service Worker) you MUST show a notification (by calling `self.registration.showNotification`), otherwise, due to the default current policy implemented in Chrome ([Ensure Push API is used for Notifications](https://docs.google.com/document/d/13VxFdLJbMwxHrvnpDm8RXnU41W2ZlcP0mdWWe9zXQT8)) the browser will show an ugly default notification (Website has been updated in the background). This problem does not seem to affect Chromium. 
 
-So a way to detect if a user already visited the URL you want to notify him about (and avoid sending unneeded notifications) has to be performed server side, but that is of course more complicated so I was not implementing it so far.
+So a way to detect if a user already visited the URL you want to notify him about (and avoid sending unneeded notifications) has to be performed server side, but that is of course a little bit more complicated so I was not implementing it so far because I had not enough time.
 
 ## SVG icons instead of font icons
 
-At the beginning I used FontAwesome to display the few icons of the website. But after some interesting reading ([Making the Switch Away from Icon Fonts to SVG](https://www.sarasoueidan.com/blog/icon-fonts-to-svg/)), I decided to switch to SVG icons, which was an excellent choice, especially in terms of less data to be downloaded.
+At the beginning I used FontAwesome to display the few icons of the website. But after some interesting reading ([Making the Switch Away from Icon Fonts to SVG](https://www.sarasoueidan.com/blog/icon-fonts-to-svg/)), I decided to switch to SVG icons, which was an excellent choice, especially because of a lot less data to be downloaded to render the website.
 
 ## NeDB
 
-To store data on the server, just by following the examples describe in the [Web Push Book by Matt Gaunt](https://web-push-book.gauntface.com/), I used [NeDB](https://github.com/louischatriot/nedb), so I discovered a wonderful piece of software, that is to MongoDB what SQLite is to MySQL.
+To store data on the server, just by following the examples describe in the [Web Push Book by Matt Gaunt](https://web-push-book.gauntface.com/), I used [NeDB](https://github.com/louischatriot/nedb), so I discovered a wonderful piece of software, that is to MongoDB what SQLite is to MySQL (or other relational SQL databases). Basically it is a Javascript database on file which implements a subset of the MongoDB APIs.
 
 ## SSL
 
-To host the site in https (needed for Service Worker to register) I used [Let's Encrypt](https://letsencrypt.org/), that since January 2018 also offers wildcard SSL certificates (at no cost!) and extremely easy to create and install (especially if you have SSH root access to your server).
+In order to host the site in https (needed for a Service Worker to register) I used [Let's Encrypt](https://letsencrypt.org/), that since January 2018 also offers wildcard SSL certificates (at no cost!) and makes extremely easy to create and install SSL certificates thanks to the EFF automation tool [EFF Certbot](https://certbot.eff.org/) (however you need to have SSH access to your server in order to use the automation tool).
 
 ## Deployment in production
 
-Something better to be written here...
+Something more to be written here...
 
 - Apache
 - Phusion Passenger
 
 # Notes about this repository
 
-The contents of the folders `public/media` (which contains the videos and the pictures of the calendar) are not published in the github repository.
+The contents of the folders `public/media` (which contains the videos and the pictures of the calendar) are not published in this github repository.
 
 **Spoiler**: the configuration file in `config/default.json` will disclose the content of the future calendar days. However my children are still too young to check it out from Github :smile:️.
 
@@ -161,4 +163,4 @@ Here a list of "TODOs":
 
 - Improve code quality
 - Implement server side detection of pages visited by users who subscribed for notification (e.g. by storing the `endpoint` of the subscription request result in the local storage and then sending it to the server when visiting a page, so the server is informed which subscribed users do not need to be notified for that day)
-- [Improve UX](https://web-push-book.gauntface.com/chapter-03/01-permission-ux/) for notification permission request 
+- [Improve UX](https://web-push-book.gauntface.com/chapter-03/01-permission-ux/) for the notification permission request 
