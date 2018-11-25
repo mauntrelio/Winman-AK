@@ -62,6 +62,8 @@ as reported here: [Web Fundamentals: Add to Home Screen](https://developers.goog
 
 ## Push Notification
 
+This app is sending subscribed users a notification a day, to alert about a new day to be "opened".
+
 All you need to know about Web Push Notification is in the [Web Push Book by Matt Gaunt](https://web-push-book.gauntface.com/).
 
 What you will need to support Push Notifications:
@@ -124,19 +126,21 @@ To start audio automatically on the home page, however, [I used a trick](https:/
 
 ## Push Notifications cannot be ignored 
 
-Well, they can, but there is drawback, at least on mobile devices.
+If you send a web push to the browser the Service Worker needs to handle it in the `push` event and he had to display a notification by calling `self.registration.showNotification`. One cannot silently ignore a web push. 
 
-What I wanted to do is to avoid annoying users by showing a notification about a specific date if they already visited the page for that date. Thanks to the caching mechanism of a Service Worker it's easy to detect it. However, when you receive a push (handling the `push` event in the Service Worker) you MUST show a notification (by calling `self.registration.showNotification`), otherwise, due to the default current policy implemented in Chrome ([Ensure Push API is used for Notifications](https://docs.google.com/document/d/13VxFdLJbMwxHrvnpDm8RXnU41W2ZlcP0mdWWe9zXQT8)) the browser will show an ugly default notification (Website has been updated in the background). This problem does not seem to affect Chromium. 
+Well, you can, but there is drawback.
 
-So a way to detect if a user already visited the URL you want to notify him about (and avoid sending unneeded notifications) has to be performed server side, but that is of course a little bit more complicated so I was not implementing it so far because I had not enough time.
+What I wanted to do is to avoid annoying users by showing a notification about a specific date if they already visited the page for that date. Thanks to the caching mechanism of a Service Worker it's easy to detect it. However, when you receive a push you MUST show a notification, otherwise, due to the default current policy implemented in Chrome ([Ensure Push API is used for Notifications](https://docs.google.com/document/d/13VxFdLJbMwxHrvnpDm8RXnU41W2ZlcP0mdWWe9zXQT8)) the browser will show an ugly default notification (_Website has been updated in the background_). This problem does not seem to affect Chromium. 
+
+A way to detect if a user already visited the URL you want to notify him about (and avoid showing unneeded notifications) has to be performed server side, by not sending a web push in first place (to those subscribers which already visited the page), but that is of course a little bit more complicated so I was not implementing such a mechanism so far because I had not enough time.
 
 ## SVG icons instead of font icons
 
-At the beginning I used FontAwesome to display the few icons of the website. But after some interesting reading ([Making the Switch Away from Icon Fonts to SVG](https://www.sarasoueidan.com/blog/icon-fonts-to-svg/)), I decided to switch to SVG icons, which was an excellent choice, especially because of a lot less data to be downloaded to render the website.
+At the beginning I used [FontAwesome](https://fontawesome.com/) to display the few icons of the website in the buttons. But after some interesting readings ([Making the Switch Away from Icon Fonts to SVG](https://www.sarasoueidan.com/blog/icon-fonts-to-svg/)), I decided to switch to SVG icons, which was an excellent choice, especially because of a lot less data to be downloaded to render the website.
 
 ## NeDB
 
-To store data on the server, just by following the examples describe in the [Web Push Book by Matt Gaunt](https://web-push-book.gauntface.com/), I used [NeDB](https://github.com/louischatriot/nedb), so I discovered a wonderful piece of software, that is to MongoDB what SQLite is to MySQL (or other relational SQL databases). Basically it is a Javascript database on file which implements a subset of the MongoDB APIs.
+To store data on the server, just by following the examples described in the [Web Push Book by Matt Gaunt](https://web-push-book.gauntface.com/), I used [NeDB](https://github.com/louischatriot/nedb): so I discovered a wonderful piece of software, that is to MongoDB what SQLite is to MySQL (or other relational SQL databases). Basically it is a Javascript database on files which implements a subset of the MongoDB APIs.
 
 ## SSL
 
