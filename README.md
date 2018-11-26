@@ -13,7 +13,7 @@ Back in 2009, I created an online Advent Calendar for my wife, using the "electr
 That calendar is still published here: https://mauriziomanetti.it/adventskalender. 
 
 Since it is 9 years old, it shows all its obsolescence, but what was mainly bothering me was the total lack of responsiveness: for a new calendar I wanted something that could be fully enjoyed on any modern device. 
-I started just with the requirement of **responsiveness** and ended up developing (and losing sleep) a **Progressive Web App** (PWA) that **can be installed** (at least on Android devices, tell me about Apple devices, if you have the chance) as a native device app, can be (partially) **used when offline**, and **supports push notifications**.
+I started with just the requirement of **responsiveness** and ended up developing (and losing sleep with) a **Progressive Web App** (PWA) that **can be installed** as a native device app (at least on Android devices, tell me about Apple devices, if you have the chance), can be (partially) **used when offline**, and **supports push notifications**.
 
 Back then, reminders to the users (actually one user) about a new calendar day to be open was performed via e-mail (the access was password protected, with a different password per day which was the solution of a riddle sent in the body of the email). 
 
@@ -60,9 +60,9 @@ What you need to make the "Add to Home Screen" (A2HS) dialog appear in Chrome fo
 
 as reported here: [Web Fundamentals: Add to Home Screen](https://developers.google.com/web/fundamentals/app-install-banners/)
 
-## Push Notification
+## Push Notifications
 
-This app is sending subscribed users a notification a day, to alert about a new day to be "opened".
+This app is sending subscribed users at least one notification a day to alert about a new day to be "opened".
 
 All you need to know about Web Push Notification is in the [Web Push Book by Matt Gaunt](https://web-push-book.gauntface.com/).
 
@@ -74,19 +74,19 @@ What you will need to support Push Notifications:
 
 # Other things I learned: 
 
-I opted for hosting all the needed media and assets on my site, which revealed to be less easy than I thought.
+I opted for hosting all the needed media and assets on my site, and it revealed to be less easy than I thought.
 
 ## Google fonts
 
-To download the used Google Fonts and host them locally (actually I only use one special font) I used [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts).
+To download the used Google Fonts and host them locally (actually I only use one Google font) I used the web app [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts).
 
 ## Video download and conversion
 
 Luckily [JibJab](https://www.jibjab.com), with which I have a paid subscription, had enough e-postcards (now in the form of videos), to fill in the 24 slots of an Advent Calendar. 
 
-However getting the videos to host them on my website was: [JibJab](https://www.jibjab.com) does not offer the option to download the videos from the website, and reverse engineering their e-card webpage was also kind of impossible. It is possible to download the videos through their Android App, however the quality is much poorer compared with what you get on the website. Somehow, after some clever tentatives, I was able to download the video from the browser, just to discover that, apparently, the actual rendering of the videos with characters' faces is performed by the browser itself, so my download was perfectly pointless, resulting in a kind of reversed green screen videos.
+However getting the videos to host them on my website was quite hard: [JibJab](https://www.jibjab.com) does not offer the option to download the videos from the website, and reverse engineering their e-card webpage was also kind of impossible. Download of the videos is available through their Android App, however the quality is much poorer compared with what you get on the website. Somehow, after some clever tentatives, I was able to download the video from the browser, just to discover that, apparently, the actual rendering of the videos with characters' faces is performed by the browser itself, so my download was perfectly pointless, resulting in a kind of reversed green screen video.
 
-After some Google search and tries, I decided to record a screen capture. I am a Linux user, and I tried a couple of different applications until I found a perfect solution in [Kazam](https://launchpad.net/kazam), a tool apparently not anymore actively developed, but perfectly working, which also gives the possibility to record a portion of the screen, and can capture the audio from any audio output channel (or input, or both!). It produced nice and good quality mp4 videos from what was rendered on my screen.
+After some Google search and tries, I decided to record a screen capture. I tried (under Linux) a couple of different applications until I found a perfect solution in [Kazam](https://launchpad.net/kazam), a tool apparently not anymore actively developed, but perfectly working, which also gives the possibility to record a portion of the screen, and can capture the audio from any audio output channel (or input, or both!). It produced nice and good quality mp4 videos from what was rendered on my screen.
 
 To convert the mp4 videos to a format that mobile devices like (webm), I used `ffmpeg`:
 
