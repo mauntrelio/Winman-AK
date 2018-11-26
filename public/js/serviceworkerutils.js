@@ -17,23 +17,25 @@ const ServiceWorkerUtils = (function($, document, window, undefined){
 
 
   const sendSubscription = function(subscription) {
-    return fetch('/api/save-subscription', {
-      method: 'POST',
+    return fetch("/api/save-subscription", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(subscription)
     })
     .then(function(response) {
       if (!response.ok) {
-        throw new Error('Bad status code from server.');
+        throw new Error("Bad status code from server.");
+      } else {
+        // save subscription endpoint into local storage
+        localStorage.setItem("endpoint", subscription.endpoint);
       }
-
       return response.json();
     })
     .then(function(responseData) {
       if (!(responseData.data && responseData.data.success)) {
-        throw new Error('Bad response from server.');
+        throw new Error("Bad response from server.");
       }
     });
   };

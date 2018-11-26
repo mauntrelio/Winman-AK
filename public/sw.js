@@ -133,32 +133,19 @@ self.addEventListener("push", function(event) {
     return;
   }
 
-  // check if user already visited the page
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => {
-      return cache.match("/" + payload.day)
-      .then(function(response) {
-        if (response === undefined) {
-        // only show notification if user did not yet visit the page
-        // unfortunately this will result in the default notification
-        // to appear (site was updated in background)
-          return self.registration.showNotification("WinMan AdventsKalendar", {
+  // show notification
+  event.waitUntil(self.registration.showNotification("WinMan AdventsKalendar", {
                   body: payload.text,
                   icon: payload.image,
                   tag: "message-" + payload.day,
                   renotify: true,
                   requireInteraction: true,
-                  vibrate: [300,100,300,100,800,300,100,300,100,800],
+                  vibrate: [300,100,300,100,800],
                   badge: "/img/badge.png",
                   data: {
                     url: payload.url 
                   }
-                });            
-        } else {
-          return null;
-        }
-      })
-    })
-  )
+                }));
   
 });
 

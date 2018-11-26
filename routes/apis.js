@@ -7,6 +7,9 @@ var router = express.Router();
 var utils = require('../lib/utils');
 var secrets = require('../config/secrets.json');
 
+var dbFile = path.join(__dirname, '..', secrets.db);
+var db = new Datastore({filename: dbFile, autoload: true});
+
 const isValidSaveRequest = function(req, res) {
   // Check the request body has at least an endpoint.
   if (!req.body || !req.body.endpoint) {
@@ -22,11 +25,9 @@ const isValidSaveRequest = function(req, res) {
   return true;
 };
 
-
+// save subscription data to the database
 const saveSubscriptionToDatabase = function(req) {
   return new Promise(function(resolve, reject) {
-    var dbFile = path.join(req.app.locals.basedir, secrets.db);
-    var db = new Datastore({filename: dbFile, autoload: true});
     db.insert(req.body, function(err, newDoc) {
       if (err) {
         reject(err);
@@ -37,8 +38,22 @@ const saveSubscriptionToDatabase = function(req) {
   });
 };
 
+// save the visit of this subscription
+const saveVisitToDatabase = function(req) {
+  return new Promise(function(resolve, reject) {
+    db.update({endpoint: req.body.endpoint}, {$addToSet: {days: req.body.day }}, function(err, doc) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(doc._id);
+    }
+    );
+  });
+};
 
-/* Subscription API */
+
+/* Save Subscription API */
 router.post('/save-subscription', function (req, res) {
 
   if (!isValidSaveRequest(req, res)) {
@@ -59,6 +74,30 @@ router.post('/save-subscription', function (req, res) {
     });
   });
 });
+
+
+/* Save visit API */
+router.post('/save-visit', function (req, res) {
+
+  if (!isValidSaveRequest(req, res)) {
+    return;
+  }
+
+  return saveVisitToDatabase(req)
+  .then(function(subscriptionId) {
+    res.json({ data: { success: true, id: subscriptionId } });
+  })
+  .catch(function(err) {
+    res.status(500);
+    res.json({
+      error: {
+        id: 'unable-to-save-visit',
+        message: 'The visit was received but we were unable to save it to our database.'
+      }
+    });
+  });
+});
+
 
 
 module.exports = router;

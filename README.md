@@ -126,13 +126,14 @@ To start audio automatically on the home page, however, [I used a trick](https:/
 
 ## Push Notifications cannot be ignored 
 
-If you send a web push to the browser the Service Worker needs to handle it in the `push` event and he had to display a notification by calling `self.registration.showNotification`. One cannot silently ignore a web push. 
+If you send a web push to the browser the Service Worker needs to handle it in the `push` event and it must display a notification by calling `self.registration.showNotification`. You cannot silently ignore a web push. 
 
 Well, you can, but there is drawback.
 
-What I wanted to do is to avoid annoying users by showing a notification about a specific date if they already visited the page for that date. Thanks to the caching mechanism of a Service Worker it's easy to detect it. However, when you receive a push you MUST show a notification, otherwise, due to the default current policy implemented in Chrome ([Ensure Push API is used for Notifications](https://docs.google.com/document/d/13VxFdLJbMwxHrvnpDm8RXnU41W2ZlcP0mdWWe9zXQT8)) the browser will show an ugly default notification (_Website has been updated in the background_). This problem does not seem to affect Chromium. 
+What I wanted to do was avoiding annoying users by showing a notification about a specific date if they already visited the page for that date. Yet I wanted to notify maybe more than once a day those users who missed to visit the page. Thanks to the caching mechanism of a Service Worker it's easy to detect if the browser visited a page. However, when you receive a push you MUST show a notification, otherwise, due to the default current policy implemented in Chrome ([Ensure Push API is used for Notifications](https://docs.google.com/document/d/13VxFdLJbMwxHrvnpDm8RXnU41W2ZlcP0mdWWe9zXQT8)) the browser will show an ugly default notification (_Website has been updated in the background_). This problem does not seem to affect Chromium. 
 
-A way to detect if a user already visited the URL you want to notify him about (and avoid showing unneeded notifications) has to be performed server side, by not sending a web push in first place (to those subscribers which already visited the page), but that is of course a little bit more complicated so I was not implementing such a mechanism so far because I had not enough time.
+Avoiding multiple notifications for those users who already performed the action you expect them to do after sending a notification (visiting a URL, in our case) has to be performed server side, by NOT sending a web push in first place to those subscribers who already visited the page. 
+That was of course a little bit more complicated so I implemented it as the last thing, and I had to save some extra data in the localStorage (basically the identifier of the notification subscription to be sent along with the information about the visited day when visiting the day page, so I could persist that information in the database).
 
 ## SVG icons instead of font icons
 
@@ -157,14 +158,15 @@ Something more to be written here...
 
 The contents of the folders `public/media` (which contains the videos and the pictures of the calendar) are not published in this github repository.
 
+Some of the code is really bad, and inconsistent (e.g. sometimes jQuery `$.get` is used, sometimes the new standard `fetch` API, sometimes single quotes, sometimes double quotes), due to the fact that some of the parts were just copied/pasted or quickly re-adapted from the examples and documentation linked in the previous sections.
+
 **Spoiler**: the configuration file in `config/default.json` will disclose the content of the future calendar days. However my children are still too young to check it out from Github :smile:️.
 
-## Possible improvements
+## Improvements
 
 I still have an hard time to understand what Javascript Promises are and how they work... I am still improving the code.
 
-Here a list of "TODOs":
+Here a short list of "TODOs":
 
-- Improve code quality
-- Implement server side detection of pages visited by users who subscribed for notification (e.g. by storing the `endpoint` of the subscription request result in the local storage and then sending it to the server when visiting a page, so the server is informed which subscribed users do not need to be notified for that day)
+- Improve code quality, fix inconsistencies
 - [Improve UX](https://web-push-book.gauntface.com/chapter-03/01-permission-ux/) for the notification permission request 

@@ -56,7 +56,7 @@ const Calendar = (function($, document, window, undefined){
 
     });   
 
-    // save settings when display day page
+    // save settings when displaying day page
     var $video = $("#video");
     if ($video.length > 0) {
       var day = $video.data("day");
@@ -64,6 +64,18 @@ const Calendar = (function($, document, window, undefined){
         var advkal = JSON.stringify({image: $video.data("image"), text: $video.data("text")});
         // save settings
         localStorage.setItem("advkal-" + day, advkal);
+        // send info to the server that we 
+        // (as notification subscribed user) visited the page
+        var endpoint = localStorage.getItem("endpoint");
+        if (endpoint) {
+          fetch("/api/save-visit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({endpoint: endpoint, day: day})
+            });
+        }
       };
     }
 
