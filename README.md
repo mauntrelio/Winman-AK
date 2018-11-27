@@ -140,6 +140,9 @@ for file in *.jpg; do
 done
 ```
 
+![Image obfuscation](https://github.com/mauntrelio/Winman-AK/raw/master/docs/transform.jpg "Image obfuscation")
+
+
 In the previous bash script the `disperse` script is used twice to get a better effect. I also obfuscated the filename with a trivial `rot13`, which later I reverted to a simpler numbering scheme. 
 Finally the last conversion brings the jpg quality down to 30 (in a range 1 to 100) which impressively reduces the size of the images (since they are obfuscated the quality can be reduced a lot without harm).
 
