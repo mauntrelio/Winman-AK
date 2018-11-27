@@ -56,7 +56,7 @@ An "Add to Home Screen" feature is always available in Chrome for Android upon u
 
 The interesting thing is that you can make an "Add to Home Screen" dialog appear in the browser to offer the user the possibility to immediately install the website as an app without having to fiddle with Chrome menu.
 
-[Add to home screen mini info bar](https://github.com/mauntrelio/Winman-AK/raw/master/docs/mini-info-bar.jpg "Add to home screen mini info bar")
+![Add to home screen mini info bar](https://github.com/mauntrelio/Winman-AK/raw/master/docs/mini-info-bar.jpg "Add to home screen mini info bar")
 
 The "Add to Home Screen" (A2HS) dialog will automatically appear in Chrome for Android, at least as of November 2018, under the following conditions:
 
