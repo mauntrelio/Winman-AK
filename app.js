@@ -21,9 +21,9 @@ app.locals.basedir = __dirname;
 app.engine('html', swig.renderFile);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
-app.set('view cache', false);
 swig.setFilter('sanitize', utils.sanitize);
-swig.setDefaults({ cache: false });
+// app.set('view cache', false);
+// swig.setDefaults({ cache: false });
 app.set('json spaces', 4);
 
 // other middle layers
