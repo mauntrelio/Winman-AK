@@ -21,7 +21,9 @@ For the new calendar I opted for **push notifications**, which was for me the ha
 
 # A Progressive Web App
 
-A PWA is a web app that uses modern web capabilities to deliver an app-like experience to users, e.g. it can be used even when the user has no Internet connection (at least to a certain extent). On Chrome for Android you can install it on the device (Add to Home Screen feature).
+A PWA is a web app that uses modern web capabilities to deliver an app-like experience to users, e.g. it can be used even when the user has no Internet connection (at least to a certain extent). 
+ 
+A nice feature of progressive web apps is that you can install them on the user device. Actually in Chrome for Android they really look like native Android applications. Starting from Chrome 70 there is also the possibility to [install a web app on a Desktop platform](https://developers.google.com/web/progressive-web-apps/desktop) (in Chrome OS, Linux and Windows) 
 
 On the server side, a PWA can be developed in any language. In fact I started prototyping it in PHP, then I switched to Node.js because I wanted to learn it. On the client, you need of course to use Javascript.
 
@@ -50,11 +52,9 @@ What I learned, in order to make a PWA...
 
 ## Add to Home Screen dialog
 
-A nice feature of progressive web app is that you can install them on the user device. Actually in Chrome for Android they really look like native Android applications. Starting from Chrome 70 there is also the possibility to [install a web app on a Desktop platform](https://developers.google.com/web/progressive-web-apps/desktop) (in Chrome OS, Linux and Windows)  
+An "Add to Home Screen" feature is always available in Chrome for Android upon user interaction with the Chrome app menu (also for websites that are not PWAs, in such case that will end up creating on your home screen just a link to the website). 
 
-An "Add to Home Screen" feature is always available in Chrome for Android upon user interaction with the Chrome app menu (also for websites that are not PWAs, in such case what will end up creating in your home screen  just a link to the website). 
-
-The interesting thing is that you can make an "Add to Home Screen" mini info bar appear in the browser to offer the user the possibility to immediately install the website as an app, without having to fiddle with the browser menu.
+The interesting thing is that, for a PWA, you can make an "Add to Home Screen" mini info bar automatically appear in the browser to offer the user the possibility to immediately install the website as an app, without having to fiddle with the browser menu.
 
 ![Add to Home Screen mini info bar](https://github.com/mauntrelio/Winman-AK/raw/master/docs/mini-info-bar.jpg "Add to Home Screen mini info bar")
 
@@ -62,7 +62,7 @@ When clicking on the mini info bar, an Add to Home Screen dialog will appear:
 
 ![Add to Home Screen dialog](https://github.com/mauntrelio/Winman-AK/raw/master/docs/add-to-home-screen.png "Add to Home Screen dialog")
 
-The "Add to Home Screen" (A2HS) dialog will automatically appear in Chrome for Android, at least as of November 2018, under the following conditions:
+The "Add to Home Screen" (A2HS) mini info bar will automatically appear in Chrome for Android, at least as of November 2018, under the following conditions:
 
 - the web app is not already installed
 - meets a user engagement heuristic (currently, the user has interacted with the domain for at least 30 seconds)
