@@ -54,7 +54,7 @@ A nice feature of progressive web app is that you can install them on the user d
 
 An "Add to Home Screen" feature is always available in Chrome for Android upon user interaction with the Chrome app menu (also for websites that are not PWAs, in such case what will end up creating in your home screen  just a link to the website). 
 
-The interesting thing is that you can make an "Add to Home Screen" mini info bar appear in the browser to offer the user the possibility to immediately install the website as an app, without having to fiddle with Chrome menu.
+The interesting thing is that you can make an "Add to Home Screen" mini info bar appear in the browser to offer the user the possibility to immediately install the website as an app, without having to fiddle with the browser menu.
 
 ![Add to Home Screen mini info bar](https://github.com/mauntrelio/Winman-AK/raw/master/docs/mini-info-bar.jpg "Add to Home Screen mini info bar")
 
@@ -76,7 +76,7 @@ The "Add to Home Screen" (A2HS) dialog will automatically appear in Chrome for A
 
 as reported here: [Web Fundamentals: Add to Home Screen](https://developers.google.com/web/fundamentals/app-install-banners/)
 
-In principle such criteria should also apply for an "Add to Home Screen" automatic dialog on Desktop platform, however I was only able to make it appear on Android. On the Desktop I add to go to the menu dialog of the browser, where the install option appeared.
+In principle such criteria should also apply for an "Add to Home Screen" automatic dialog on Desktop platform, however I was only able to make it appear on Android. To install the app on the Desktop I still add to use the menu of the browser, where an install option appeared.
 
 ![Install App on Desktop platform](https://github.com/mauntrelio/Winman-AK/raw/master/docs/install-desktop.jpg "Install App on Desktop platform")
 
