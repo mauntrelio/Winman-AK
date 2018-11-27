@@ -135,8 +135,8 @@ for file in *.jpg; do
 	obfuscated=`echo $filename | tr 'A-Za-z' 'N-ZA-Mn-za-m'`
 	echo "Obfuscating $filename > $obfuscated"; 
 	~/scripts/imagemagick/disperse -s 20 -d 10 -c 0 $filename.jpg /tmp/$filename.jpg; 
-	~/scripts/imagemagick/disperse -s 20 -d 10 -c 0 /tmp/$filename.jpg /tmp/$obfuscated.png;
-	convert -quality 30 /tmp/$obfuscated.png $obfuscated.jpg 
+	~/scripts/imagemagick/disperse -s 20 -d 10 -c 0 /tmp/$filename.jpg /tmp/$obfuscated.jpg;
+	convert -quality 30 /tmp/$obfuscated.jpg $obfuscated.jpg 
 done
 ```
 
