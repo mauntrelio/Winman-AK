@@ -85,7 +85,7 @@ In principle such criteria should also apply for an "Add to Home Screen" automat
 
 Another dialog that will appear the first time you load the website is the Permission request for notification (actually I could improve the UX for this kind of request but I had no time).
 
-![Request for notification permission](https://github.com/mauntrelio/Winman-AK/raw/master/docs/notify-permission-request.jpg "Request for notification permission")
+![Request for notification permission](https://github.com/mauntrelio/Winman-AK/raw/master/docs/notify-permission-request.png "Request for notification permission")
 
 This app is sending subscribed users at least one notification a day to alert about a new day to be "opened".
 
