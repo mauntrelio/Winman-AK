@@ -1,4 +1,4 @@
-var CACHE_NAME = "xmas-cache-v13";
+var CACHE_NAME = "xmas-cache-v15";
 var urlsToCache = [
   "/",
   "/qr",
@@ -7,6 +7,7 @@ var urlsToCache = [
   "/img/offline.png",
   "/img/launcher-icon-1x.png",
   "/img/launcher-icon-4x.png",
+  "/img/forkme.png",
   "/img/icons.svg",
   "/audio/np.mp3",
   "/audio/silence.mp3",
@@ -92,7 +93,7 @@ self.addEventListener("fetch", function(event) {
         var page_status = response.headers.get("X-Page-Status");
 
         // only cache GET html and json content if header X-Page-Status is completed
-        if (Array("text/html; charset=utf-8", "application/json").indexOf(content_type) == -1) {
+        if (!content_type.startsWith("text/html") && !content_type.startsWith("application/json")) {
           can_cache = true;
         } else if (page_status == "completed") {
           can_cache = true;
