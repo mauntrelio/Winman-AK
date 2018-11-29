@@ -1,4 +1,4 @@
-var CACHE_NAME = "xmas-cache-v11";
+var CACHE_NAME = "xmas-cache-v13";
 var urlsToCache = [
   "/",
   "/qr",

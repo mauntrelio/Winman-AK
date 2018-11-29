@@ -73,10 +73,10 @@ footer {
 div.kalender {
   display: inline-block;
   width: 20%;
-  min-width: 175px;
+  min-width: 160px;
   max-width: 460px;
   height: 25%;
-  min-height: 130px;
+  min-height: 125px;
   max-height: 345px;
   margin: 1%;
   text-align: center;
