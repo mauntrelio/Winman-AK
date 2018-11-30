@@ -6,7 +6,7 @@ https://xmas.winman.online
 
 Besides being a little surprise for my kids, it is a small Progressive Web App, developed in Javascript (server side technologies are Node.js and Express). 
 
-The app simply display a calendar with "closed" days represented by obfuscated images that can be clicked and "opened" only on the corresponding December day, giving access to a page where a Xmas theme video from [JibJab](https://www.jibjab.com) with the faces of my family's components is displayed. If a user accepts to receive the app's notification, the app will use Web push to notify every day about a new page (unless the user already opened it).
+The app simply displays a 24 tiles calendar with "closed" days represented by obfuscated images that can be clicked and "opened" only on the corresponding December day, giving access to a web page where a Xmas themed video from [JibJab](https://www.jibjab.com) with the faces of my family's components is displayed. If a user accepts to receive the app's notification, the app will use the Web push protocol to notify every day about a new page (unless the user already opened it).
 
 # Background
 
