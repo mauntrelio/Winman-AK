@@ -6,14 +6,16 @@ https://xmas.winman.online
 
 Besides being a little surprise for my kids, it is a small Progressive Web App, developed in Javascript (server side technologies are Node.js and Express). 
 
+The app simply display a calendar with "closed" days represented by obfuscated images that can be clicked and "opened" only on the corresponding December day, giving access to a page where a Xmas theme video from [JibJab](https://www.jibjab.com) with the faces of my family's components is displayed. If a user accepts to receive the app's notification, the app will use Web push to notify every day about a new page (unless the user already opened it).
+
 # Background
 
-Back in 2009, I created an online Advent Calendar for my wife, using the "electronic postcards" that you could make on [JibJab](https://www.jibjab.com).
+Back in 2009, I created an online Advent Calendar for my wife, using the "electronic postcards" that you could make on JibJab.
 
 That calendar is still published here: https://mauriziomanetti.it/adventskalender. 
 
 Since it is 9 years old, it shows all its obsolescence, but what was mainly bothering me was the total lack of responsiveness: for a new calendar I wanted something that could be fully enjoyed on any modern device. 
-I started with just the requirement of **responsiveness** and ended up developing (and losing sleep with) a **Progressive Web App** (PWA) that **can be installed** as a native device app (at least on Android devices, tell me about Apple devices, if you have the chance), can be (partially) **used when offline**, and **supports push notifications**.
+I started with just the requirement of **responsiveness** and ended up developing (and losing sleep with) a **Progressive Web App** (PWA) that **can be installed** as a native device app (at least on Android devices, tell me about Apple devices, if you have the chance), can be (partially) **used when offline**, and **sends push notifications**.
 
 Back then, reminders to the users (actually one user) about a new calendar day to be open was performed via e-mail (the access was password protected, with a different password per day which was the solution of a riddle sent in the body of the email). 
 
