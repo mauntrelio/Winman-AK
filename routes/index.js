@@ -42,7 +42,7 @@ router.get('/ajax/:day([0-9]+)', function (req, res, next){
       "status": "ERROR",
       "message": "Bad day requested"
     };
-  } else if (day_asked > today || month != 12) {    
+  } else if (day_asked > today || month != 11) {    
     result = {
       "status": "ERROR",
       "message": config.messages.sorry.de + "<br><br>" + config.messages.sorry.it 
@@ -72,7 +72,7 @@ router.get('/:day([0-9]+)', function (req, res, next){
     page = 'index';
   } else if (day_asked < 0 || day_asked >= 25) {
     next(createError(404, "Not found!"));
-  } else if (day_asked > today || month != 12) {
+  } else if (day_asked > today || month != 11) {
     page = 'sorry';   
   } else {
     // tell the service worker he can cache this page
