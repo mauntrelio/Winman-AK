@@ -24,6 +24,7 @@ router.get('/qr/:day([0-9]+)?', function(req, res, next) {
   if (day_asked > 0 && day_asked < 25) {
     text += day_asked; 
   }
+  res.set('Content-Type', 'image/png');
   QRCode.toFileStream(res, text, {scale: 6, errorCorrectionLevel: 'L'});  
 });
 

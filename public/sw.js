@@ -85,7 +85,6 @@ self.addEventListener("fetch", function(event) {
       // console.log("Found response in cache:", response);
       return response;
     } else {
-      // console.log("No response found in cache. About to fetch from network...");
       return fetch(event.request).then(function (response) {
 
         var can_cache = false;
@@ -93,17 +92,22 @@ self.addEventListener("fetch", function(event) {
         var page_status = response.headers.get("X-Page-Status");
 
         // only cache GET html and json content if header X-Page-Status is completed
-        if (!content_type.startsWith("text/html") && !content_type.startsWith("application/json")) {
-          can_cache = true;
-        } else if (page_status == "completed") {
-          can_cache = true;
+        if (content_type && !(content_type.startsWith("text/html") || content_type.startsWith("application/json"))) {
+            can_cache = true;
+        } 
+
+        // can cache also html or json with completed page status header        
+        if (page_status == "completed") {
+            can_cache = true;
         }
 
+        // but never cache NON GET requests
         if (event.request.method != "GET") {
           can_cache = false;
         }
 
         if ( can_cache ) {
+          
           // response may be used only once
           // we need to save clone to put one copy in cache
           // and serve second one
@@ -113,7 +117,7 @@ self.addEventListener("fetch", function(event) {
           });
         }  
         return response;
-      }).catch(function () {
+      }).catch(function (reason) {
         // console.log("No response found in cache and no network. Fall back on offline content");
         if (/\/qr/.test(event.request.url)) {
           return caches.match("/img/offline.png");
