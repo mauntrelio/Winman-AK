@@ -17,7 +17,7 @@
 		["03","Snowman Scurry"],
 		["04","Elf Dance"],
 		["05","Macareindeer"],
-		["06","Santa's Twerk Shop", "Featuring Oma"],
+		["26","Grandma Got Run Over By A Reindeer", "Featuring Oma"],	
 		["07","Ice Ice Baby Christmas"],
 		["08","Hawaiian Christmas"],
 		["09","Santa Baby"],
@@ -35,6 +35,8 @@
 		["21","Farting Carol", "Featuring Opa"],
 		["22","Elf Snowball Fight", "Featuring Susanne"],
 		["23","Beginning to Look Like Christmas"],
-		["24","Twinkle all the Way"]	
+		["24","Twinkle all the Way"],	
+		["25","Sleigh Ride"],	
+		["06","Santa's Twerk Shop", "Featuring Oma"]
 	]
 }
