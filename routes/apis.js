@@ -28,12 +28,26 @@ const isValidSaveRequest = function(req, res) {
 // save subscription data to the database
 const saveSubscriptionToDatabase = function(req) {
   return new Promise(function(resolve, reject) {
-    db.insert(req.body, function(err, newDoc) {
+    db.find({endpoint: req.body.endpoint}, function(err, results) {
       if (err) {
+        // error while searching
         reject(err);
         return;
+      } else if (results.length === 0) {
+        db.insert(req.body, function(err, newDoc) {
+          // No result fond: inserting
+          if (err) {
+            // error while inserting
+            reject(err);
+            return;
+          }
+          // solving promise with new document id
+          resolve(newDoc._id);
+        });
+      } else {
+        // solving promise with found document id
+        resolve(results[0]._id);
       }
-      resolve(newDoc._id);
     });
   });
 };
