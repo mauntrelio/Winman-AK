@@ -1,4 +1,4 @@
-var CACHE_NAME = "xmas-cache-v15";
+var CACHE_NAME = "xmas-cache-v18";
 var urlsToCache = [
   "/",
   "/qr",
@@ -32,7 +32,7 @@ var urlsToCache = [
   "/media/03.jpg",
   "/media/04.jpg",
   "/media/05.jpg",
-  "/media/06.jpg",
+  "/media/26.jpg",
   "/media/07.jpg",
   "/media/08.jpg",
   "/media/09.jpg",
