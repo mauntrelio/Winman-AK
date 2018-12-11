@@ -204,4 +204,5 @@ Here a short list of "TODOs":
 
 - Improve Service Worker cache invalidation when new content is available on the website
 - Improve code quality, fix inconsistencies
+- Assets minification
 - [Improve UX](https://web-push-book.gauntface.com/chapter-03/01-permission-ux/) for the notification permission request 
